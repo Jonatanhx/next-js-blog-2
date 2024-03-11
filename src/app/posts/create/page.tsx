@@ -1,5 +1,6 @@
 import { getAllBlogPosts } from "@/app/blogPosts";
 import fs from "fs/promises";
+import { revalidatePath } from "next/cache";
 export default async function CreatePostPage() {
   const createBlogPost = async (formData: FormData) => {
     "use server";
@@ -19,6 +20,7 @@ export default async function CreatePostPage() {
       "data/blog-posts.json",
       JSON.stringify(blogPosts, null, 2)
     );
+    revalidatePath("/");
   };
 
   return (
@@ -29,13 +31,19 @@ export default async function CreatePostPage() {
         action={createBlogPost}
         className="border p-4 flex flex-col gap-1 text-black"
       >
-        <label htmlFor="title">Title</label>
+        <label className="text-white" htmlFor="title">
+          Title
+        </label>
         <input id="title" name="title" />
 
-        <label htmlFor="author">Author</label>
+        <label className="text-white" htmlFor="author">
+          Author
+        </label>
         <input id="author" name="author"></input>
 
-        <label htmlFor="content">Title</label>
+        <label className="text-white" htmlFor="content">
+          Title
+        </label>
         <textarea id="content" name="content" rows={6}></textarea>
 
         <button className="mt-4 border-b-2 border-white text-white">
