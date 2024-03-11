@@ -11,6 +11,9 @@ export default async function home() {
         Blog
       </h1>
       <span className="mb-12">{date}</span>
+
+      <Link href="/posts/create">Add New Posts</Link>
+
       <h2 className="text-4xl mb-4">Latest posts</h2>
       <ul className="flex flex-col gap-4">
         {blogPosts.map((post) => (
