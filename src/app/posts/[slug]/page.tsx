@@ -1,18 +1,16 @@
-import fs from "fs/promises";
+import { getAllBlogPosts } from "@/app/blogPosts";
 type PageProps = { params: { slug: string } };
 
 export async function generateStaticParams() {
-  const data = await fs.readFile("data/blog-posts.json", { encoding: "utf-8" });
-  const blogPosts = JSON.parse(data);
-  return blogPosts.map((post: any) => ({
+  const blogPosts = await getAllBlogPosts();
+  return blogPosts.map((post) => ({
     slug: post.slug,
   }));
 }
 
 export default async function BlogPostsPage({ params }: PageProps) {
-  const data = await fs.readFile("data/blog-posts.json", { encoding: "utf-8" });
-  const blogPosts = JSON.parse(data);
-  const blogPost = blogPosts.find((post: any) => post.slug === params.slug);
+  const blogPosts = await getAllBlogPosts();
+  const blogPost = blogPosts.find((post) => post.slug === params.slug);
 
   if (!blogPost) {
     return (

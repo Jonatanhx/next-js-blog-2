@@ -1,9 +1,7 @@
-import fs from "fs/promises";
 import Link from "next/link";
+import { getAllBlogPosts } from "./blogPosts";
 export default async function home() {
-  const data = await fs.readFile("data/blog-posts.json", { encoding: "utf-8" });
-
-  const blogPosts = JSON.parse(data);
+  const blogPosts = await getAllBlogPosts();
 
   const date = new Date().toUTCString();
 
@@ -15,7 +13,7 @@ export default async function home() {
       <span className="mb-12">{date}</span>
       <h2 className="text-4xl mb-4">Latest posts</h2>
       <ul className="flex flex-col gap-4">
-        {blogPosts.map((post: any) => (
+        {blogPosts.map((post) => (
           <Link
             href={`/posts/${post.slug}`}
             key={post.id}
