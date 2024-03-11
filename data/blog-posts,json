@@ -1,0 +1,16 @@
+[
+    {
+        "id": "1",
+        "slug": "how-react-works",
+        "title": "how-react-works",
+        "author": "Dan Abramov",
+        "content": "lorem"
+    },  
+    {
+        "id": "2",
+        "slug": "what-are-server-components",
+        "title": "What are server components?",
+        "author": "Ivan akulov",
+        "content": "lorem"
+    }
+]
